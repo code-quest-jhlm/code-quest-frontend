@@ -1,4 +1,6 @@
 import { FC, ReactNode } from 'react';
+import { Container } from '@mantine/core';
+
 import AppHeader from '@/components/AppHeader';
 
 interface DashboardLayoutProps {
@@ -8,7 +10,9 @@ interface DashboardLayoutProps {
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => (
   <>
     <AppHeader />
-    {children}
+    <Container size="lg">
+      {children}
+    </Container>
   </>
 );
 

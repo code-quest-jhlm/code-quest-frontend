@@ -2,7 +2,7 @@
   padding-top: var(--mantine-spacing-sm);
   background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
   border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-2), transparent);
-  margin-bottom: rem(120px);
+  margin-bottom: rem(54px);
   box-shadow: 0px 3px 6px #00000067;
 }
 
