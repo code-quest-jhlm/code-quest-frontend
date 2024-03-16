@@ -1,9 +1,12 @@
-import styles from "./App.module.css";
+import '@mantine/core/styles.css';
+import { MantineProvider } from '@mantine/core';
+import { Router } from './Router';
+import { theme } from './theme';
 
 export default function App() {
   return (
-    <main className={styles.main}>
-      Hello React + TypeScript + Vite
-    </main>
+    <MantineProvider theme={theme}>
+      <Router />
+    </MantineProvider>
   );
 }

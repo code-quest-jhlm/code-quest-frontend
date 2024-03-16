@@ -1,4 +1,6 @@
-node_modules
-dist
-coverage
-.eslintcache
+*.js
+*.cjs
+*.mjs
+*.d.ts
+*.d.mts
+vite.config.ts
