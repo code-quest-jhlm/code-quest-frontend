@@ -1,0 +1,27 @@
+:root {
+  --form-with: 26.1875rem;
+}
+
+.cq-form-wrapper-shadow {
+  background-color: var(--mantine-primary-color-9);
+  border-radius: var(--mantine-radius-xl);
+  width: calc(var(--form-with) + 2rem);
+  position: absolute;
+  z-index: 1;
+  min-height: 24.3125rem;
+  margin-left: 3.5rem;
+  padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+}
+
+.cq-form-bg {
+  z-index: 2;
+  background-color: var(--mantine-color-body);
+  border-radius: var(--mantine-radius-md);
+  width: var(--form-with);
+  padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+  }
+}

@@ -9,6 +9,9 @@ export const theme = createTheme({
   primaryColor: 'violet',
   components: {
     Button: Button.extend({
+      defaultProps: {
+        radius: 'md',
+      },
       styles: {
         inner: {
           fontFamily: 'Poppins',
