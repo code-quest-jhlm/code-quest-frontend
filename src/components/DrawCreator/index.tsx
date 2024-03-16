@@ -58,7 +58,7 @@ const DrawCreator: FC<DrawCreatorProps> = (props) => (
       </Grid>
 
       <Flex mt={32} justify="flex-end" columnGap={32}>
-        <Button variant="subtle" size="lg" color="white">
+        <Button variant="subtle" size="lg" color="white" onClick={props.onClose}>
           Cancelar
         </Button>
         <Button variant="filled" size="lg">

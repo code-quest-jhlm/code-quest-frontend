@@ -6,9 +6,9 @@ import logo from '@/assets/detalles_light_logo.png';
 import classes from './AppHeader.module.css';
 
 const user = {
-  name: 'Fernando Herrera',
+  name: 'Francisco Marin',
   email: 'janspoon@fighter.dev',
-  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
+  image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
 };
 
 const AppHeader = () => (
@@ -33,7 +33,7 @@ const AppHeader = () => (
                   <Text fw={500} size="sm" lh={1} mr={3}>
                     {user.name}
                   </Text>
-                  <small>#Klerith</small>
+                  <small>#Franc01__</small>
                 </div>
                 <Avatar src={user.image} alt={user.name} radius="xl" size={54} />
               </Group>

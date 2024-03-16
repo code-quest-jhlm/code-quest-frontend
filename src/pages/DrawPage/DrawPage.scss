@@ -1,0 +1,23 @@
+.cq-start-draw-button{
+  height: 12.8125rem;
+  width: 17.375rem;
+
+  .mantine-Button-label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5rem;
+    row-gap: 1rem;
+  }
+
+  &__image{
+    height: 6.8125rem;
+    width: 6.8125rem;
+  }
+}
+
+.cq-cancel-draw-button{
+  .mantine-Button-label{
+    font-weight: 400;
+  }
+}
