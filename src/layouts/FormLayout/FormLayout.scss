@@ -1,0 +1,43 @@
+:root {
+  --form-with: 26.25rem;
+  --form-height: 20rem;
+}
+
+.cq-form-wrapper-shadow {
+  background-color: var(--mantine-primary-color-9);
+  border-radius: var(--mantine-radius-xl);
+  width: calc(var(--form-with) + 2rem);
+  position: absolute;
+  z-index: 1;
+  margin-left: 3.5rem;
+  padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+
+  &.admin{
+    min-height: calc(var(--form-height) + 4rem);
+  }
+
+  &.client{
+    --form-height: 13.875rem;
+    min-height: calc(var(--form-height) + 2rem);
+  }
+}
+
+.cq-form-bg {
+  z-index: 2;
+  background-color: var(--mantine-color-body);
+  border-radius: var(--mantine-radius-md);
+  width: var(--form-with);
+  padding: var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+
+  &__title {
+    display: block;
+    text-align: center;
+    margin-bottom: var(--mantine-spacing-sm);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+  }
+}
