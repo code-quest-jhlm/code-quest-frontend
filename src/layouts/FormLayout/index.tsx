@@ -9,12 +9,12 @@ interface FormLayoutProps {
   children: ReactNode;
 }
 
-const FormLayout: FC<FormLayoutProps> = ({ title = 'Iniciar sesión', children }) => (
+const FormLayout: FC<FormLayoutProps> = ({ title = 'Iniciar sesión', variant = 'admin', children }) => (
   <>
-    <Box className="cq-form-wrapper-shadow" />
+    <Box className={`cq-form-wrapper-shadow ${variant}`} />
     <Box className="cq-form-bg">
       <>
-        <Title order={3} mx="auto">
+        <Title order={3} className="cq-form-bg__title">
           {title}
         </Title>
         {children}

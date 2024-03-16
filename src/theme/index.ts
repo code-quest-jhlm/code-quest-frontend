@@ -1,6 +1,6 @@
 import { createTheme, Button } from '@mantine/core';
 
-export const theme = createTheme({
+const cqTheme = createTheme({
   fontFamily: 'Inter, sans-serif',
   headings: {
     fontFamily: 'Poppins, sans-serif',
@@ -22,3 +22,5 @@ export const theme = createTheme({
     }),
   },
 });
+
+export default cqTheme;
