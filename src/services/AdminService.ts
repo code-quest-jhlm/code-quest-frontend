@@ -22,8 +22,8 @@ async function makeRequest<TResponse, TRequest = any>(
 }
 
 const AdminService = {
-  adminLogin: <TResponse, TRequest = any>(data: TRequest) => makeRequest<TResponse, TRequest>('POST', '/login', data),
-  adminProfile: <TResponse>() => makeRequest<TResponse>('GET', '/profile'),
+  adminLogin: <TResponse, TRequest = any>(data: TRequest) => makeRequest<TResponse, TRequest>('POST', '/auth/login', data),
+  adminProfile: <TResponse>() => makeRequest<TResponse>('GET', '/auth/profile'),
 };
 
 export default AdminService;
