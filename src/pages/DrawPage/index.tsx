@@ -10,6 +10,7 @@ import {
   TextInput,
   Title,
   rem,
+  Space,
 } from '@mantine/core';
 
 import { useDisclosure } from '@mantine/hooks';
@@ -75,7 +76,7 @@ const DrawPage = () => {
               </Grid.Col>
             </Grid>
           </Box>
-
+          <Space style={{ marginBottom: rem(24) }} />
           <Attendees users={[]} />
         </Grid.Col>
         <Grid.Col span={4}>

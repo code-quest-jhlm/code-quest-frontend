@@ -19,7 +19,6 @@ const cqTheme = createTheme({
           fontWeight: '600',
         },
       },
-
     }),
   },
 });
