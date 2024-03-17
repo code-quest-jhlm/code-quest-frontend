@@ -1,0 +1,19 @@
+.q-wrapper-modal-winner{
+  .mantine-Modal-body{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.cq-more-winner{
+  @media screen and (max-width: 30rem) {
+    display: flex;
+    column-gap: 2rem !important;
+
+    .cq-winner-info{
+      p{
+        font-size: .75rem;
+      }
+    }
+  }
+}
