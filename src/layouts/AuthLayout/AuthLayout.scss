@@ -1,8 +1,6 @@
-body{
-  overflow: hidden;
-}
-
 .cq-auth-bg {
+  position: relative;
+  overflow: hidden;
   background: var(--mantine-primary-color-8);
   padding: 0;
   margin: 0;
