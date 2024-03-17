@@ -10,10 +10,12 @@ import {
   TextInput,
   Title,
   rem,
+  Space,
 } from '@mantine/core';
 
 import { useDisclosure } from '@mantine/hooks';
 import { IconPencil, IconChevronLeft } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 import DashboardLayout from '@/layouts/DashboardLayout';
 
@@ -26,13 +28,20 @@ import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
 
 const DrawPage = () => {
-  const [opened, { close, open }] = useDisclosure(false);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [opened, { open, close }] = useDisclosure(false);
+  const navigate = useNavigate();
   return (
     <DashboardLayout>
       <Flex justify="flex-start" align="center" mb="sm" columnGap={8}>
         <ActionIcon variant="subtle">
-          <IconChevronLeft size={32} stroke={1.5} />
+          <IconChevronLeft
+            size={32}
+            stroke={1.5}
+            onClick={() => {
+              navigate('/home');
+            }}
+          />
         </ActionIcon>
 
         <Title order={2}>Nombre del sorteo</Title>
@@ -75,7 +84,7 @@ const DrawPage = () => {
               </Grid.Col>
             </Grid>
           </Box>
-
+          <Space style={{ marginBottom: rem(24) }} />
           <Attendees users={[]} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>
