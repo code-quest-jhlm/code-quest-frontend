@@ -15,11 +15,12 @@ const AdminLogin = () => (
         boxConfig={{
           pos: 'absolute',
           top: rem(60),
-          right: rem(120),
+          right: { base: -16, md: 120 },
         }}
         imageConfig={{
-          h: rem(350),
+          h: { base: 200, md: 350 },
           w: rem(250),
+          fit: 'contain',
           src: flyImage,
         }}
       />
@@ -30,11 +31,12 @@ const AdminLogin = () => (
         boxConfig={{
           pos: 'absolute',
           bottom: 0,
-          left: rem(120),
+          left: { base: 24, md: 120 },
         }}
         imageConfig={{
-          h: rem(280),
-          w: rem(280),
+          h: { base: 200, md: 280 },
+          fit: 'contain',
+          w: { base: 200, md: 280 },
           src: winkImage,
         }}
       />
