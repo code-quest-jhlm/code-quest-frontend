@@ -1,4 +1,4 @@
-import { createTheme, Button, Input } from '@mantine/core';
+import { createTheme, Button } from '@mantine/core';
 
 const cqTheme = createTheme({
   fontFamily: 'Inter, sans-serif',
@@ -17,14 +17,6 @@ const cqTheme = createTheme({
           fontFamily: 'Poppins',
           fontSize: '1rem',
           fontWeight: '600',
-        },
-      },
-    }),
-    Input: Input.extend({
-      styles: {
-        input: {
-          backgroundColor: '#202225',
-          border: 'none',
         },
       },
     }),

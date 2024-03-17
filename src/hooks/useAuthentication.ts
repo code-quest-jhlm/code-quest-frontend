@@ -2,6 +2,7 @@
 import { useCallback, useState } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
+import { AxiosError } from 'axios';
 import AdminService from '@/services/AdminService';
 
 interface LoginData {
@@ -20,7 +21,7 @@ interface UseAuthenticationParams {
 
 function useAuthentication({ setSessionInformation, navigate }: UseAuthenticationParams) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState(false);
+  const [errorFields, setErrorFields] = useState([]);
 
   const login = useCallback(async (loginData: LoginData) => {
     setIsLoading(true);
@@ -29,17 +30,22 @@ function useAuthentication({ setSessionInformation, navigate }: UseAuthenticatio
       const response = await AdminService.adminLogin<LoginResponse, LoginData>(loginData);
       console.log(response);
 
-      navigate('/home');
+      navigate('/home', {
+        replace: true,
+      });
+
       setIsLoading(false);
-    } catch (err) {
-      setIsError(true);
-      setSessionInformation(null);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setErrorFields(error.response?.data?.message);
+      }
     } finally {
       setIsLoading(false);
+      setSessionInformation(null);
     }
   }, []);
 
-  return { login, isError, isLoading };
+  return { login, errorFields, isLoading, setErrorFields };
 }
 
 export default useAuthentication;

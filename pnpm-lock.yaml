@@ -8,6 +8,9 @@ dependencies:
   '@mantine/core':
     specifier: 7.6.1
     version: 7.6.1(@mantine/hooks@7.6.1)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
+  '@mantine/form':
+    specifier: ^7.6.2
+    version: 7.6.2(react@18.2.0)
   '@mantine/hooks':
     specifier: 7.6.1
     version: 7.6.1(react@18.2.0)
@@ -2291,6 +2294,16 @@ packages:
       type-fest: 3.13.1
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /@mantine/form@7.6.2(react@18.2.0):
+    resolution: {integrity: sha512-a5jHPdU3UXvqeAsAvv+OBrwAy/dxiAxCsMlyRrc9JyKCMLEkQ5cQ6FAiHx5vkGG49hy+VgFWLLt8+kWlgqphsQ==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      fast-deep-equal: 3.1.3
+      klona: 2.0.6
+      react: 18.2.0
     dev: false
 
   /@mantine/hooks@7.6.1(react@18.2.0):
@@ -5212,7 +5225,6 @@ packages:
 
   /fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
-    dev: true
 
   /fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
@@ -6414,6 +6426,11 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
     dev: true
+
+  /klona@2.0.6:
+    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
+    engines: {node: '>= 8'}
+    dev: false
 
   /known-css-properties@0.29.0:
     resolution: {integrity: sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==}

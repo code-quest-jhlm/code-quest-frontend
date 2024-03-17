@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
 
 const CodeQuestAPI = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000/api',
 });
 
 export async function makeRequest<TResponse, TRequest = any>(
