@@ -1,8 +1,10 @@
-export interface JwtTokenPayload {
+export interface ProfileInfo {
+  id: number;
+  name: string;
+  userId: string;
   email: string;
   role: string;
-  exp: number;
-  iat: number;
+  deletedAt: null;
 }
 
-export type SessionInformation = JwtTokenPayload | null;
+export type ProfileInformation = ProfileInfo | null;
