@@ -1,26 +1,45 @@
-import { FC, ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { FC, ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+
+import { JwtTokenPayload, SessionInformation } from '@/interfaces/common.interface';
+import { TOKEN_KEY } from '@/constants';
 
 export interface AppContextProps {
-  userInformation: null;
-  setUserInformation: React.Dispatch<React.SetStateAction<null>>;
+  sessionInformation: SessionInformation;
+  setSessionInformation: React.Dispatch<React.SetStateAction<SessionInformation>>;
 }
 
 export const AppContext = createContext({} as AppContextProps);
-export const useAppContext = useContext(AppContext);
+export const useAppContext = () => useContext(AppContext);
 
 export interface AppContextProviderProps {
   children: ReactNode;
 }
 
 const AppContextProvider: FC<AppContextProviderProps> = ({ children }) => {
-  const [userInformation, setUserInformation] = useState(null);
+  const [sessionInformation, setSessionInformation] = useState<SessionInformation>(null);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem(TOKEN_KEY) || '';
+    if (token) {
+      try {
+        const decoded = jwtDecode<JwtTokenPayload>(token);
+        setSessionInformation((prevState) => ({
+          ...prevState,
+          ...decoded,
+        }));
+      } catch (error) {
+        setSessionInformation(null);
+      }
+    }
+  }, []);
 
   const values = useMemo(
     () => ({
-      userInformation,
-      setUserInformation,
+      sessionInformation,
+      setSessionInformation,
     }),
-    [userInformation]
+    [sessionInformation]
   );
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
