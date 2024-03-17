@@ -1,10 +1,17 @@
 import { Flex, Text, Avatar, Paper, Space, Box, ActionIcon, Group, Badge } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 
 import './DrawItem.scss';
 
-const DrawItem = () => {
+interface DrawItemProps {
+  openClosure: () => void
+}
+
+const DrawItem: FC<DrawItemProps> = ({
+  openClosure,
+}) => {
   const navigate = useNavigate();
   return (
     <>
@@ -47,7 +54,11 @@ const DrawItem = () => {
               />
             </ActionIcon>
             <ActionIcon variant="subtle" color="red">
-              <IconTrash size={32} stroke={1.5} />
+              <IconTrash
+                size={32}
+                stroke={1.5}
+                onClick={openClosure}
+              />
             </ActionIcon>
           </Group>
         </Flex>

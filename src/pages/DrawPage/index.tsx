@@ -26,10 +26,12 @@ import DrawButtonImage from '@/assets/draw_button_image.png';
 
 import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
+import DrawCancel from '@/components/DrawCancel';
 
 const DrawPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [opened, { open, close }] = useDisclosure(false);
+  const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
   const navigate = useNavigate();
   return (
     <DashboardLayout>
@@ -95,12 +97,13 @@ const DrawPage = () => {
                 <Image className="cq-start-draw-button__image" src={DrawButtonImage} />
                 ¡SORTEAR!
               </Button>
-              <Button className="cq-cancel-draw-button" variant="subtle" color="red">Cancelar sorteo</Button>
+              <Button className="cq-cancel-draw-button" variant="subtle" color="red" onClick={openClosure}>Cancelar sorteo</Button>
             </Flex>
           </Flex>
         </Grid.Col>
       </Grid>
       <DrawWinner opened={opened} onClose={close} centered />
+      <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
     </DashboardLayout>
   );
 };

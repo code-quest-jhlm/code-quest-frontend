@@ -6,6 +6,7 @@ import {
   Space,
   SimpleGrid,
   rem,
+  ActionIcon,
 } from '@mantine/core';
 import { IconRefresh } from '@tabler/icons-react';
 import { FC } from 'react';
@@ -27,11 +28,13 @@ const Attendees: FC<AttendeesProps> = ({
       >
         Participantes activos: {users.length}
       </Title>
-      <IconRefresh
-        cursor="pointer"
-        color="#A8A5FB"
-        onClick={() => {}}
-      />
+      <ActionIcon variant="subtle" className="cq-action-button">
+        <IconRefresh
+          cursor="pointer"
+          color="#A8A5FB"
+          onClick={() => {}}
+        />
+      </ActionIcon>
     </Flex>
     <Space style={{ marginBottom: rem(16) }} />
     <ScrollArea.Autosize

@@ -3,9 +3,11 @@ import { useDisclosure } from '@mantine/hooks';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import DrawItem from '@/components/DrawItem';
 import DrawCreator from '@/components/DrawCreator';
+import DrawCancel from '@/components/DrawCancel';
 
 const HomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
+  const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
   return (
     <DashboardLayout>
@@ -14,17 +16,18 @@ const HomePage = () => {
         <Button size="lg" onClick={open}>¡Crear sorteo!</Button>
       </Flex>
       <ScrollArea.Autosize mah={620} maw="1280" mx="auto" offsetScrollbars p="md" className="hello">
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
-        <DrawItem />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
+        <DrawItem openClosure={openClosure} />
       </ScrollArea.Autosize>
       <DrawCreator opened={opened} onClose={close} centered />
+      <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
     </DashboardLayout>
   );
 };
