@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import { useCallback, useState } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
 import { AxiosError } from 'axios';
 import AdminService from '@/services/AdminService';
+import { TOKEN_KEY } from '@/constants';
 
 interface LoginData {
   username: string;
@@ -15,11 +15,12 @@ interface LoginResponse {
 }
 
 interface UseAuthenticationParams {
-  setSessionInformation: Function;
+  setToken: Function;
   navigate: NavigateFunction;
+  setProfileInformation: Function
 }
 
-function useAuthentication({ setSessionInformation, navigate }: UseAuthenticationParams) {
+function useAuthentication({ setToken, navigate, setProfileInformation }: UseAuthenticationParams) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorFields, setErrorFields] = useState([]);
 
@@ -28,20 +29,29 @@ function useAuthentication({ setSessionInformation, navigate }: UseAuthenticatio
 
     try {
       const response = await AdminService.adminLogin<LoginResponse, LoginData>(loginData);
-      console.log(response);
 
-      navigate('/home', {
-        replace: true,
+      sessionStorage.setItem(TOKEN_KEY, response.token);
+      setToken(response.token);
+
+      const profile = await AdminService.adminProfile({
+        headers: {
+          Authorization: `Bearer ${response.token}`,
+        },
       });
 
+      setProfileInformation(profile);
       setIsLoading(false);
+
+      navigate('/home');
     } catch (error) {
       if (error instanceof AxiosError) {
         setErrorFields(error.response?.data?.message);
+      } else {
+        setErrorFields([]);
       }
     } finally {
       setIsLoading(false);
-      setSessionInformation(null);
+      setToken('');
     }
   }, []);
 

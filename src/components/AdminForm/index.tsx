@@ -9,11 +9,12 @@ import { extractFirstErrorForEachField } from '@/helpers';
 
 const AdminForm = () => {
   const navigate = useNavigate();
-  const { setSessionInformation } = useAppContext();
+  const { setToken, setProfileInformation } = useAppContext();
 
   const { login, errorFields, setErrorFields } = useAuthentication({
     navigate,
-    setSessionInformation,
+    setToken,
+    setProfileInformation,
   });
 
   const form = useForm({

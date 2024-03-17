@@ -6,24 +6,24 @@ import AppHeader from '@/components/AppHeader';
 import AppFooter from '@/components/AppFooter';
 
 import { useAppContext } from '@/provider/AppProvider';
+import useValidateSesion from '@/hooks/useValidateSesion';
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
-  const { sessionInformation } = useAppContext();
+  const { setToken } = useAppContext();
+  const { hasSession } = useValidateSesion({ setToken });
 
-  if (!sessionInformation) {
+  if (!hasSession) {
     return <Navigate to="/" replace />;
   }
 
   return (
     <>
       <AppHeader />
-      <Container size="lg">
-        {children}
-      </Container>
+      <Container size="lg">{children}</Container>
       <AppFooter />
     </>
   );

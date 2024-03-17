@@ -1,12 +1,11 @@
-import { FC, ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
-
-import { JwtTokenPayload, SessionInformation } from '@/interfaces/common.interface';
-import { TOKEN_KEY } from '@/constants';
+import { FC, ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { ProfileInformation } from '@/interfaces/common.interface';
 
 export interface AppContextProps {
-  sessionInformation: SessionInformation;
-  setSessionInformation: React.Dispatch<React.SetStateAction<SessionInformation>>;
+  token: string,
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  profileInformation: ProfileInformation;
+  setProfileInformation: React.Dispatch<React.SetStateAction<ProfileInformation>>;
 }
 
 export const AppContext = createContext({} as AppContextProps);
@@ -17,29 +16,17 @@ export interface AppContextProviderProps {
 }
 
 const AppContextProvider: FC<AppContextProviderProps> = ({ children }) => {
-  const [sessionInformation, setSessionInformation] = useState<SessionInformation>(null);
-
-  useEffect(() => {
-    const token = sessionStorage.getItem(TOKEN_KEY) || '';
-    if (token) {
-      try {
-        const decoded = jwtDecode<JwtTokenPayload>(token);
-        setSessionInformation((prevState) => ({
-          ...prevState,
-          ...decoded,
-        }));
-      } catch (error) {
-        setSessionInformation(null);
-      }
-    }
-  }, []);
+  const [token, setToken] = useState('');
+  const [profileInformation, setProfileInformation] = useState<ProfileInformation>(null);
 
   const values = useMemo(
     () => ({
-      sessionInformation,
-      setSessionInformation,
+      token,
+      profileInformation,
+      setToken,
+      setProfileInformation,
     }),
-    [sessionInformation]
+    [profileInformation]
   );
 
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
