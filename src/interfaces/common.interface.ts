@@ -5,6 +5,7 @@ export interface ProfileInfo {
   email: string;
   role: string;
   deletedAt: null;
+  avatar: string
 }
 
-export type ProfileInformation = ProfileInfo | null;
+export type ProfileInformation = ProfileInfo;

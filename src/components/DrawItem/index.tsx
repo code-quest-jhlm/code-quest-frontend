@@ -6,6 +6,7 @@ import { FC } from 'react';
 import './DrawItem.scss';
 
 interface DrawItemProps {
+  item: any;
   openClosure: () => void
 }
 

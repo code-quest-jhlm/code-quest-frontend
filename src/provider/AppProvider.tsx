@@ -17,7 +17,7 @@ export interface AppContextProviderProps {
 
 const AppContextProvider: FC<AppContextProviderProps> = ({ children }) => {
   const [token, setToken] = useState('');
-  const [profileInformation, setProfileInformation] = useState<ProfileInformation>(null);
+  const [profileInformation, setProfileInformation] = useState({} as ProfileInformation);
 
   const values = useMemo(
     () => ({
