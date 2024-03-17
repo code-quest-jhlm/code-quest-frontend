@@ -1,0 +1,22 @@
+.q-wrapper-modal-cancel {
+  .mantine-Modal-body {
+    padding: 0;
+  }
+
+  .mantine-Modal-header {
+    h2 {
+      font-family: Poppins;
+      font-weight: 800;
+      font-size: 1.125rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.cq-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  min-height: 4.875rem;
+  min-width: 3.4375rem;
+  border-radius: .5rem;
+}
