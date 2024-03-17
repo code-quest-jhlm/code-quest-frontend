@@ -6,7 +6,6 @@ import {
   ModalBaseProps,
   Select,
   TextInput,
-  Title,
 } from '@mantine/core';
 import { FC } from 'react';
 
@@ -16,7 +15,7 @@ interface DrawCreatorProps extends ModalBaseProps {
 
 const DrawCreator: FC<DrawCreatorProps> = (props) => (
   <>
-    <Modal {...props} title={<Title order={3}>Crear sorteo</Title>} size="xl">
+    <Modal {...props} title="Crear sorteo" size="xl">
       <Flex direction="column" rowGap={12}>
         <TextInput label="Nombre" placeholder="Ej: Sorteo 10M subscriptores" />
         <TextInput label="Descripción (Opcional)" placeholder="Ej: Lorem ipsum" />

@@ -23,10 +23,10 @@ import DrawMedia from '@/components/DrawMedia';
 import DrawButtonImage from '@/assets/draw_button_image.png';
 
 import './DrawPage.scss';
+import DrawWinner from '@/components/DrawWinner';
 
 const DrawPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { close, open }] = useDisclosure(false);
 
   return (
     <DashboardLayout>
@@ -44,10 +44,10 @@ const DrawPage = () => {
       <Divider my="md" color="dark" />
 
       <Grid>
-        <Grid.Col span={8}>
+        <Grid.Col span={{ base: 12, md: 8 }}>
           <Box>
             <Grid>
-              <Grid.Col span={5}>
+              <Grid.Col span={{ base: 6, md: 5 }}>
                 <Select
                   leftSectionPointerEvents="none"
                   leftSection="#"
@@ -56,7 +56,7 @@ const DrawPage = () => {
                   data={['1', '2', '3', '4']}
                 />
               </Grid.Col>
-              <Grid.Col span={5}>
+              <Grid.Col span={{ base: 6, md: 5 }}>
                 <TextInput
                   label="Máx. participantes"
                   placeholder="Ej: 1200"
@@ -67,10 +67,10 @@ const DrawPage = () => {
             </Grid>
 
             <Grid>
-              <Grid.Col span={5}>
+              <Grid.Col span={{ base: 12, md: 5 }}>
                 <TextInput label="Premio 1" placeholder="Ej: Subscripción Anual DevTalles" />
               </Grid.Col>
-              <Grid.Col span={5}>
+              <Grid.Col span={{ base: 12, md: 5 }}>
                 <TextInput label="Premio 2" placeholder="Ej: Subscripción Trimestral DevTalles" />
               </Grid.Col>
             </Grid>
@@ -78,11 +78,11 @@ const DrawPage = () => {
 
           <Attendees users={[]} />
         </Grid.Col>
-        <Grid.Col span={4}>
+        <Grid.Col span={{ base: 12, md: 4 }}>
           <Flex justify="space-between" direction="column" align="center">
             <DrawMedia />
             <Flex mt={rem(40)} rowGap={rem(24)} direction="column" align="center">
-              <Button className="cq-start-draw-button">
+              <Button className="cq-start-draw-button" onClick={open}>
                 <Image className="cq-start-draw-button__image" src={DrawButtonImage} />
                 ¡SORTEAR!
               </Button>
@@ -91,6 +91,7 @@ const DrawPage = () => {
           </Flex>
         </Grid.Col>
       </Grid>
+      <DrawWinner opened={opened} onClose={close} centered />
     </DashboardLayout>
   );
 };
