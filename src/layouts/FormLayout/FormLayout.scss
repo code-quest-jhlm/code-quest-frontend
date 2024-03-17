@@ -20,6 +20,10 @@
     --form-height: 13.875rem;
     min-height: calc(var(--form-height) + 2rem);
   }
+
+  @media screen and (max-width: 30rem) {
+    display: none;
+  }
 }
 
 .cq-form-bg {
