@@ -42,9 +42,7 @@ const AppHeader = () => {
                   </div>
                   <Avatar
                     src={
-                      profileInformation?.avatar ||
-                      `https://avatars.dicebear.com/api/bottts/${generateRandomSeed()}.svg`
-                    }
+                      profileInformation?.avatar}
                     alt={profileInformation.name}
                     radius="xl"
                     size={54}

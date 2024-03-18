@@ -1,4 +1,4 @@
-import { Button, Flex, Image, ScrollArea, Title } from '@mantine/core';
+import { Button, Flex, Image, ScrollArea, Text, Title, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import DashboardLayout from '@/layouts/DashboardLayout';
@@ -29,7 +29,15 @@ const HomePage = () => {
         {hasData ? (
           drawList.map((item) => <DrawItem item={item} openClosure={openClosure} />)
         ) : (
-          <Image src={NotDraw} fit="contain" />
+          <Flex direction="column" align="center" justify="center">
+            <Image
+              src={NotDraw}
+              fit="cover"
+              w={{ base: rem(300), md: rem(400) }}
+              h={{ base: rem(300), md: rem(400) }}
+            />
+            <Text fw="bold" mr={{ base: rem(32), md: rem(48) }}>No hay sorteos activos</Text>
+          </Flex>
         )}
       </ScrollArea.Autosize>
       <DrawCreator opened={opened} onClose={close} centered />

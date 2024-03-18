@@ -19,7 +19,7 @@ const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase
 const extractFirstErrorForEachField = (errorMessages: string[]): ErrorMessages => {
   const fieldErrors: ErrorMessages = {};
 
-  errorMessages.forEach((message) => {
+  errorMessages?.forEach((message) => {
     const match = message.match(/^(\w+)\s(.+)/);
     if (match) {
       const [, fieldName, errorMessage] = match;
@@ -36,7 +36,3 @@ export {
   capitalizeFirstLetter,
   extractFirstErrorForEachField,
 };
-
-export function generateRandomSeed() {
-  return Math.random().toString(36).substring(2, 15);
-}
