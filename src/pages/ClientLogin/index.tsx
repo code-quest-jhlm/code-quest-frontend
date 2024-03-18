@@ -17,14 +17,14 @@ const ClientLogin = () => {
     getDraw(params.id!);
   }, []);
 
-  if (!currentDraw) {
-    return <Navigate to="/home" replace />;
-  }
+  // if (!currentDraw) {
+  //   return <Navigate to="/home" replace />;
+  // }
 
   return (
     <AuthLayout>
       <FormLayout title={currentDraw?.title} variant="client">
-        <ClientForm drawItem={currentDraw} />
+        <ClientForm drawItem={currentDraw!} />
       </FormLayout>
       <AssetRender
         boxConfig={{

@@ -13,7 +13,13 @@ const ClientForm = ({ drawItem }: ClientFormProps) => {
     <>
       <Text>Presiona el botón e Inicia sesión en Discord y estarás participando en el sorteo.</Text>
       <Group justify="center" mt="md">
-        <Button type="button" size="lg" onClick={() => authenticationWithDiscord(drawItem.id)}>
+        <Button
+          type="button"
+          size="lg"
+          onClick={async () => {
+            const response: any = await authenticationWithDiscord(drawItem.id);
+            window.location.href = response.discordUrl;
+          }}>
           Participar!
         </Button>
       </Group>
