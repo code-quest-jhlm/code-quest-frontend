@@ -29,13 +29,19 @@ import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
 import useDraw from '@/hooks/useDraw';
 import { useAppContext } from '@/provider/AppProvider';
+import useDrawAdministration from '@/hooks/useDrawAdministration';
 
 const DrawPage = () => {
   const { token } = useAppContext();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
+
   const navigate = useNavigate();
-  const { deleteDraw } = useDraw({ token });
+
+  const { deleteDraw } = useDraw();
+
+  const { updateDraw } = useDrawAdministration();
+
   return (
     <DashboardLayout>
       <Flex justify="flex-start" align="center" mb="sm" columnGap={8}>

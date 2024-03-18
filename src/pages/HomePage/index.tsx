@@ -11,13 +11,15 @@ import DrawCancel from '@/components/DrawCancel';
 import useDraw from '@/hooks/useDraw';
 
 import NotDraw from '@/assets/not_draw.png';
+import useDrawAdministration from '@/hooks/useDrawAdministration';
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, createDraw, drawList, deleteDraw } = useDraw();
+  const { hasData, drawList, deleteDraw } = useDraw();
+  const { createDraw } = useDrawAdministration();
 
   return (
     <DashboardLayout>
@@ -44,6 +46,7 @@ const HomePage = () => {
           </Flex>
         )}
       </ScrollArea.Autosize>
+
       <DrawCreator
         navigate={navigate}
         onSubmitForm={createDraw}

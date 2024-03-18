@@ -25,19 +25,6 @@ const useDraw = () => {
     }
   }, []);
 
-  const createDraw = useCallback(async (values: CreateDrawPayload) => {
-    try {
-      await AdminService.adminDrawCreate(values, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // TODO: Mostrar notificacion
-
-    } catch (error) {
-      // TODO: Mostrar notificacion
-    }
-  }, []);
 
   const deleteDraw = useCallback(async (drawId: string) => {
     try {
@@ -63,7 +50,6 @@ const useDraw = () => {
     drawList,
     hasData: !!hasError && drawList.length,
     isFetchingDraw,
-    createDraw,
     deleteDraw,
   };
 };
