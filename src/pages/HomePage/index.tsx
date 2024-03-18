@@ -10,12 +10,14 @@ import DrawCancel from '@/components/DrawCancel';
 import useDraw from '@/hooks/useDraw';
 
 import NotDraw from '@/assets/not_draw.png';
+import { useAppContext } from '@/provider/AppProvider';
 
 const HomePage = () => {
+  const { token } = useAppContext();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, drawList } = useDraw();
+  const { hasData, drawList } = useDraw({ token });
 
   return (
     <DashboardLayout>

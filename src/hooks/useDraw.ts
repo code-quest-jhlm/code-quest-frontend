@@ -1,15 +1,39 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import AdminService from '@/services/AdminService';
 
-interface UseDrawParams {}
+interface UseDrawParams {
+  token: string
+}
 
-const useDraw = (params?: UseDrawParams) => {
+const useDraw = ({ token }: UseDrawParams) => {
+  const [isFetchingDraw, setIsFetchingDraw] = useState(true);
   const [hasError, setHasError] = useState(true);
   const [drawList, setDrawList] = useState([]);
 
+  const listDraw = () => useCallback(async () => {
+    try {
+      const list = await AdminService.adminDrawFindAll({
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log({ list });
+      setIsFetchingDraw(false);
+    } catch (error) {
+      setIsFetchingDraw(false);
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    listDraw();
+  }, []);
+
   return {
-    params,
     drawList,
     hasData: !hasError && drawList.length,
+    isFetchingDraw,
   };
 };
 
