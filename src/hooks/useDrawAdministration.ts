@@ -30,9 +30,8 @@ const useDrawAdministration = () => {
           Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
-      // TODO: Mostrar notificacion
     } catch (error) {
-      // TODO: Mostrar notificacion
+      //
     }
   }, []);
 
@@ -56,7 +55,7 @@ const useDrawAdministration = () => {
         },
       });
     } catch (error) {
-      console.log(error);
+      //
     }
   }, []);
 
@@ -68,9 +67,8 @@ const useDrawAdministration = () => {
         },
       });
       setCurrentDraw(draw);
-      // TODO: Mostrar notificacion
     } catch (error) {
-      // TODO: Mostrar notificacion
+      //
     }
   }, []);
 

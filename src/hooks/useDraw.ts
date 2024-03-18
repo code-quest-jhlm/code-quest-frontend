@@ -35,7 +35,7 @@ const useDraw = () => {
       setDrawList([]);
       listDraw();
     } catch (error) {
-      console.log(error);
+      // ERROR
     }
   }, []);
 
