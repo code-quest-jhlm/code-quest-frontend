@@ -6,7 +6,11 @@ import { TOKEN_KEY } from '@/constants';
 const useDrawAdministration = () => {
   const createDraw = useCallback(async (values: CreateDrawPayload) => {
     try {
-      await AdminService.adminDrawCreate(values, {
+      await AdminService.adminDrawCreate({
+        ...values,
+        state: true,
+        totalWinners: +values.totalWinners,
+      }, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },

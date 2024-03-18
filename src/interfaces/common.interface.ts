@@ -13,4 +13,7 @@ export type ProfileInformation = ProfileInfo | null;
 export interface CreateDrawPayload {
   title: string
   description: string
+  awards: string
+  totalWinners: string,
+  state: boolean
 }
