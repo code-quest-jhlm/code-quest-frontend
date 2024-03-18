@@ -31,6 +31,7 @@ import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
 import useDrawAdministration from '@/hooks/useDrawAdministration';
+import useRandomSelection from '@/hooks/useRandomSelection';
 
 const DrawPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -39,11 +40,11 @@ const DrawPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { updateDraw, deleteDraw, getParticipants, currentDraw } = useDrawAdministration();
+  const { deleteDraw, getParticipants, currentDraw } = useDrawAdministration();
   const participants = (currentDraw ?? state)?.participants?.map(
     (p: any) => ({ name: p.name, image: p.avatar })
   );
-  console.log({ participants });
+  const { winners, generateWinners } = useRandomSelection();
   useEffect(() => {
     const listener = (() => {
       navigate('/home');
@@ -99,7 +100,7 @@ const DrawPage = () => {
                   disabled
                   label={`Premio ${index + 1}`}
                   placeholder="Ej: Subscripción Anual DevTalles"
-                  value={state?.awards[index]}
+                  value={state?.awards?.[index]}
                 />
               ))}
             </SimpleGrid>
@@ -116,7 +117,12 @@ const DrawPage = () => {
           <Flex justify="space-between" direction="column" align="center">
             <DrawMedia drawItem={state} />
             <Flex mt={rem(40)} rowGap={rem(24)} direction="column" align="center">
-              <Button className="cq-start-draw-button" onClick={open} loading>
+              <Button
+                className="cq-start-draw-button"
+                onClick={() => {
+                  generateWinners(participants, state?.totalWinners);
+                  open();
+                }}>
                 <Image className="cq-start-draw-button__image" src={DrawButtonImage} />
                 ¡SORTEAR!
               </Button>
@@ -136,7 +142,7 @@ const DrawPage = () => {
           </Flex>
         </Grid.Col>
       </Grid>
-      <DrawWinner opened={opened} onClose={close} centered />
+      <DrawWinner winners={winners} opened={opened} onClose={close} centered />
       <DrawCancel opened={openedCancel} onClose={closeClosure} deleteDraw={deleteDraw} centered />
     </DashboardLayout>
   );

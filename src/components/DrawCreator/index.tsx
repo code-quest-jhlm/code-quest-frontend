@@ -31,6 +31,15 @@ const DrawCreator: FC<DrawCreatorProps> = ({ onSubmitForm, navigate, ...props })
     },
   });
 
+  const onSubmit = async (values: any) => {
+    await onSubmitForm(values);
+    reset();
+    props.onClose();
+    navigate('/draw', {
+      state: values,
+    });
+  };
+
   const totalWinners = useWatch({
     control,
     name: 'totalWinners',
@@ -39,7 +48,7 @@ const DrawCreator: FC<DrawCreatorProps> = ({ onSubmitForm, navigate, ...props })
   return (
     <>
       <Modal {...props} title="Crear sorteo" size="xl">
-        <form onSubmit={handleSubmit(onSubmitForm)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Flex direction="column" rowGap={12}>
             <Controller
               name="title"

@@ -6,6 +6,7 @@ import './DrawWinner.scss';
 
 interface DrawWinnerProps extends ModalBaseProps {
   centered?: boolean;
+  winners: any[]
 }
 
 const DrawWinner: FC<DrawWinnerProps> = (props) => (
@@ -25,8 +26,8 @@ const DrawWinner: FC<DrawWinnerProps> = (props) => (
           columnGap={rem(80)}
         >
           <WinnerInfo
-            username="Lorem ipsum"
-            avatarUrl="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png"
+            username={props.winners[0]?.name}
+            avatarUrl={props.winners[0]?.image}
           />
         </Flex>
         <Flex
@@ -39,18 +40,12 @@ const DrawWinner: FC<DrawWinnerProps> = (props) => (
           mt={rem(32)}
 
         >
-          <WinnerInfo
-            username="Lorem ipsum"
-            avatarUrl="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png"
-          />
-          <WinnerInfo
-            username="Lorem ipsum"
-            avatarUrl="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png"
-          />
-          <WinnerInfo
-            username="Lorem ipsum"
-            avatarUrl="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png"
-          />
+          {props.winners?.slice(1).map((winner) => (
+            <WinnerInfo
+              username={winner?.name}
+              avatarUrl={winner?.image}
+            />
+          ))}
         </Flex>
       </Modal.Body>
     </Modal>
