@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <AdminLogin />,
   },
   {
-    path: '/client',
+    path: '/draw/:id',
     element: <ClientLogin />,
   },
   {

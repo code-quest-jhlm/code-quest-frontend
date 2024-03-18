@@ -17,3 +17,14 @@ export interface CreateDrawPayload {
   totalWinners: string,
   state: boolean
 }
+
+export interface DrawItemValue {
+  id: string;
+  title: string;
+  description: string;
+  state: boolean;
+  totalWinners: number;
+  awards: string[];
+  drawDate: string;
+  participants: any[];
+}

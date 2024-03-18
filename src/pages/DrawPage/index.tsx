@@ -11,11 +11,13 @@ import {
   Title,
   rem,
   Space,
+  SimpleGrid,
+  Text,
 } from '@mantine/core';
 
 import { useDisclosure } from '@mantine/hooks';
 import { IconPencil, IconChevronLeft } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import DashboardLayout from '@/layouts/DashboardLayout';
 
@@ -35,6 +37,7 @@ const DrawPage = () => {
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const { deleteDraw } = useDraw();
 
@@ -53,12 +56,13 @@ const DrawPage = () => {
           />
         </ActionIcon>
 
-        <Title order={2}>Nombre del sorteo</Title>
+        <Title order={2}>{state.title}</Title>
 
         <ActionIcon variant="subtle">
           <IconPencil size={20} stroke={1.5} />
         </ActionIcon>
       </Flex>
+      <Text>{state.description}</Text>
       <Divider my="md" color="dark" />
 
       <Grid>
@@ -67,36 +71,47 @@ const DrawPage = () => {
             <Grid>
               <Grid.Col span={{ base: 12, md: 12 }}>
                 <Select
+                  disabled
                   leftSectionPointerEvents="none"
                   leftSection="#"
                   label="Número de ganadores"
                   placeholder="Ej: 1"
+                  value={state?.totalWinners.toString()}
                   data={['1', '2', '3', '4']}
                 />
               </Grid.Col>
             </Grid>
 
-            <Grid>
-              <Grid.Col span={{ base: 12, md: 5 }}>
-                <TextInput label="Premio 1" placeholder="Ej: Subscripción Anual DevTalles" />
-              </Grid.Col>
-              <Grid.Col span={{ base: 12, md: 5 }}>
-                <TextInput label="Premio 2" placeholder="Ej: Subscripción Trimestral DevTalles" />
-              </Grid.Col>
-            </Grid>
+            <SimpleGrid cols={2} mt={rem(24)} verticalSpacing={{ base: 'md', sm: 'xs' }}>
+              {Array.from({ length: parseInt(state?.totalWinners, 10) }).map((_, index) => (
+                <TextInput
+                  disabled
+                  label={`Premio ${index + 1}`}
+                  placeholder="Ej: Subscripción Anual DevTalles"
+                  value={state?.awards[index]}
+                />
+              ))}
+            </SimpleGrid>
           </Box>
           <Space style={{ marginBottom: rem(24) }} />
           <Attendees users={[]} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Flex justify="space-between" direction="column" align="center">
-            <DrawMedia />
+            <DrawMedia drawItem={state} />
             <Flex mt={rem(40)} rowGap={rem(24)} direction="column" align="center">
               <Button className="cq-start-draw-button" onClick={open}>
                 <Image className="cq-start-draw-button__image" src={DrawButtonImage} />
                 ¡SORTEAR!
               </Button>
-              <Button className="cq-cancel-draw-button" variant="subtle" color="red" onClick={openClosure}>Cancelar sorteo</Button>
+              <Button
+                className="cq-cancel-draw-button"
+                variant="subtle"
+                color="red"
+                onClick={openClosure}
+              >
+                Cancelar sorteo
+              </Button>
             </Flex>
           </Flex>
         </Grid.Col>
