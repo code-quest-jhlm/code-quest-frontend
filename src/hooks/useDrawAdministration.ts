@@ -7,9 +7,9 @@ const useDrawAdministration = () => {
   const [isErrorCurrentDraw, setIsErrorCurrentDraw] = useState(false);
   const [currentDraw, setCurrentDraw] = useState<DrawItemValue | null>();
 
-  const createDraw = useCallback(async (values: CreateDrawPayload) => {
+  const createDraw = async (values: CreateDrawPayload) => {
     try {
-      await AdminService.adminDrawCreate({
+      return await AdminService.adminDrawCreate({
         ...values,
         state: true,
         totalWinners: +values.totalWinners,
@@ -18,11 +18,10 @@ const useDrawAdministration = () => {
           Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
-      //
     } catch (error) {
-      //
+      return null;
     }
-  }, []);
+  };
 
   const updateDraw = useCallback(async (drawId: string) => {
     try {

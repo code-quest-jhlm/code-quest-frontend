@@ -13,11 +13,10 @@ import {
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { FC } from 'react';
 import { NavigateFunction } from 'react-router-dom';
-import { CreateDrawPayload } from '@/interfaces/common.interface';
 
 interface DrawCreatorProps extends ModalBaseProps {
   centered?: boolean;
-  onSubmitForm: (values: CreateDrawPayload) => void;
+  onSubmitForm: Function;
   navigate: NavigateFunction;
 }
 
@@ -32,12 +31,14 @@ const DrawCreator: FC<DrawCreatorProps> = ({ onSubmitForm, navigate, ...props })
   });
 
   const onSubmit = async (values: any) => {
-    await onSubmitForm(values);
+    const data = await onSubmitForm(values);
     reset();
     props.onClose();
-    navigate('/draw', {
-      state: values,
-    });
+    if (data) {
+      navigate('/draw', {
+        state: data,
+      });
+    }
   };
 
   const totalWinners = useWatch({
