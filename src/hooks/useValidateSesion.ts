@@ -3,12 +3,10 @@ import { useEffect } from 'react';
 import { TOKEN_KEY } from '@/constants';
 
 interface UseValidateSesionProps {
-  setToken: Function
   setProfileInformation: Function;
 }
 
 const useValidateSesion = ({
-  setToken,
   setProfileInformation,
 }: UseValidateSesionProps) => {
   const token = sessionStorage.getItem(TOKEN_KEY) || '';
@@ -18,9 +16,7 @@ const useValidateSesion = ({
       try {
         const data = jwtDecode(token);
         setProfileInformation(data);
-        setToken(token);
       } catch (error) {
-        setToken('');
         setProfileInformation(null);
       }
     }

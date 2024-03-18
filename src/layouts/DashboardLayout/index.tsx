@@ -13,8 +13,8 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
-  const { setToken, setProfileInformation } = useAppContext();
-  const { hasSession } = useValidateSesion({ setToken, setProfileInformation });
+  const { setProfileInformation } = useAppContext();
+  const { hasSession } = useValidateSesion({ setProfileInformation });
 
   if (!hasSession) {
     return <Navigate to="/" replace />;

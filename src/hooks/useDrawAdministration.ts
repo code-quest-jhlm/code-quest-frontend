@@ -1,16 +1,14 @@
 import { useCallback } from 'react';
 import { CreateDrawPayload } from '@/interfaces/common.interface';
-import { useAppContext } from '@/provider/AppProvider';
 import AdminService from '@/services/AdminService';
+import { TOKEN_KEY } from '@/constants';
 
 const useDrawAdministration = () => {
-  const { token } = useAppContext();
-
   const createDraw = useCallback(async (values: CreateDrawPayload) => {
     try {
       await AdminService.adminDrawCreate(values, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
       // TODO: Mostrar notificacion
@@ -23,7 +21,7 @@ const useDrawAdministration = () => {
     try {
       await AdminService.adminDrawUpdateOne(drawId, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
       // TODO: Mostrar notificacion
@@ -36,7 +34,7 @@ const useDrawAdministration = () => {
     try {
       await AdminService.adminDrawFindOne(drawId, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
       // TODO: Mostrar notificacion

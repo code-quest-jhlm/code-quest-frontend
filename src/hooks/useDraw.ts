@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useEffect, useState } from 'react';
 import AdminService from '@/services/AdminService';
-import { CreateDrawPayload } from '@/interfaces/common.interface';
-import { useAppContext } from '@/provider/AppProvider';
+import { TOKEN_KEY } from '@/constants';
 
 const useDraw = () => {
-  const { token } = useAppContext();
   const [isFetchingDraw, setIsFetchingDraw] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [drawList, setDrawList] = useState<any[]>([]);
@@ -14,7 +12,7 @@ const useDraw = () => {
     try {
       const list = await AdminService.adminDrawFindAll({
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
       setDrawList(list as any);
@@ -25,14 +23,13 @@ const useDraw = () => {
     }
   }, []);
 
-
   const deleteDraw = useCallback(async (drawId: string) => {
     try {
       await AdminService.adminDrawRemove(drawId, {
         state: false,
       }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
       setDrawList([]);
