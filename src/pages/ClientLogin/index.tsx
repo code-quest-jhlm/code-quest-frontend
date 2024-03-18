@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useSearchParams } from 'react-router-dom';
 import FormLayout from '@/layouts/FormLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 
@@ -11,20 +11,21 @@ import useDrawAdministration from '@/hooks/useDrawAdministration';
 
 const ClientLogin = () => {
   const params = useParams();
-  const { getDraw, currentDraw } = useDrawAdministration();
+  const [searchParams] = useSearchParams();
+  const { getDraw, currentDraw, isErrorCurrentDraw } = useDrawAdministration();
 
   useEffect(() => {
     getDraw(params.id!);
   }, []);
 
-  // if (!currentDraw) {
-  //   return <Navigate to="/home" replace />;
-  // }
+  if (isErrorCurrentDraw) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <AuthLayout>
-      <FormLayout title={currentDraw?.title} variant="client">
-        <ClientForm drawItem={currentDraw!} />
+      <FormLayout title={currentDraw?.title ?? ''} variant="client">
+        <ClientForm drawItem={currentDraw!} isEnrolled={searchParams.get('enroll') === '0'} />
       </FormLayout>
       <AssetRender
         boxConfig={{

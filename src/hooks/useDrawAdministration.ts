@@ -4,7 +4,9 @@ import AdminService from '@/services/AdminService';
 import { TOKEN_KEY } from '@/constants';
 
 const useDrawAdministration = () => {
+  const [isErrorCurrentDraw, setIsErrorCurrentDraw] = useState(false);
   const [currentDraw, setCurrentDraw] = useState<DrawItemValue | null>();
+
   const createDraw = useCallback(async (values: CreateDrawPayload) => {
     try {
       await AdminService.adminDrawCreate({
@@ -41,6 +43,7 @@ const useDrawAdministration = () => {
       setCurrentDraw(data);
     } catch (error) {
       setCurrentDraw(null);
+      setIsErrorCurrentDraw(true);
     }
   }, []);
 
@@ -73,6 +76,7 @@ const useDrawAdministration = () => {
 
   return {
     currentDraw,
+    isErrorCurrentDraw,
     createDraw,
     getDraw,
     updateDraw,

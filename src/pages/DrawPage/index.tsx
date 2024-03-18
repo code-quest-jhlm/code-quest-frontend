@@ -111,7 +111,7 @@ const DrawPage = () => {
           <Flex justify="space-between" direction="column" align="center">
             <DrawMedia drawItem={state} />
             <Flex mt={rem(40)} rowGap={rem(24)} direction="column" align="center">
-              <Button className="cq-start-draw-button" onClick={open}>
+              <Button className="cq-start-draw-button" onClick={open} loading>
                 <Image className="cq-start-draw-button__image" src={DrawButtonImage} />
                 ¡SORTEAR!
               </Button>
