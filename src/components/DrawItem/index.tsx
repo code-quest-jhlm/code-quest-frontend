@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { Flex, Text, Avatar, Paper, Space, Box, ActionIcon, Group, Badge } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ interface DrawItemProps {
 
 const DrawItem: FC<DrawItemProps> = ({
   openClosure,
+  item,
 }) => {
   const navigate = useNavigate();
   return (
@@ -21,46 +23,48 @@ const DrawItem: FC<DrawItemProps> = ({
           <Box>
             <Flex direction="column">
               <Flex align="center" columnGap={8}>
-                <Text fw={700}>Nombre del sorteo </Text>
-                <Badge size="xs" circle color="green" />
+                <Text fw={700}>{item.title} </Text>
+                <Badge size="xs" circle color={item.state ? 'green' : 'red'} />
               </Flex>
-              <Text size="sm">Fecha: xx/xx/xxxx</Text>
+              <Text size="sm">Fecha: {item.drawDate}</Text>
               <Space h="xs" />
             </Flex>
             <Avatar.Group>
-              <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-6.png"
-                size="sm"
-              />
-              <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png"
-                size="sm"
-              />
-              <Avatar
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png"
-                size="sm"
-              />
-              <Avatar size="sm">+5</Avatar>
+              {item.participants?.slice(0, 3)?.map((participant: any) => (
+                <Avatar
+                  src={participant.avatar}
+                  size="sm"
+                />
+              ))}
+              {item.participants?.length > 3 && (<Avatar size="sm">+{item.participants?.length - 3}</Avatar>)}
             </Avatar.Group>
           </Box>
 
           <Group>
-            <ActionIcon variant="subtle" color="blue">
-              <IconPencil
-                size={32}
-                stroke={1.5}
-                onClick={() => {
-                  navigate('/draw');
-                }}
-              />
-            </ActionIcon>
-            <ActionIcon variant="subtle" color="red">
-              <IconTrash
-                size={32}
-                stroke={1.5}
-                onClick={openClosure}
-              />
-            </ActionIcon>
+            {item.state && (
+              <>
+                <ActionIcon variant="subtle" color="blue">
+                  <IconPencil
+                    size={32}
+                    stroke={1.5}
+                    onClick={() => {
+                      navigate('/draw');
+                    }}
+                  />
+                </ActionIcon>
+                <ActionIcon variant="subtle" color="red">
+                  <IconTrash
+                    size={32}
+                    stroke={1.5}
+                    onClick={() => {
+                      openClosure();
+                      const event = new CustomEvent('CQ::SEND::ID', { detail: { id: item.id } });
+                      window.dispatchEvent(event);
+                    }}
+                  />
+                </ActionIcon>
+              </>
+            )}
           </Group>
         </Flex>
       </Paper>

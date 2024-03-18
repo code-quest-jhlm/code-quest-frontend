@@ -8,8 +8,8 @@ interface UseDrawParams {
 
 const useDraw = ({ token }: UseDrawParams) => {
   const [isFetchingDraw, setIsFetchingDraw] = useState(true);
-  const [hasError, setHasError] = useState(true);
-  const [drawList, setDrawList] = useState([]);
+  const [hasError, setHasError] = useState(false);
+  const [drawList, setDrawList] = useState<any[]>([]);
 
   const listDraw = useCallback(async () => {
     try {
@@ -18,12 +18,11 @@ const useDraw = ({ token }: UseDrawParams) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      console.log({ list });
+      setDrawList(list as any);
       setIsFetchingDraw(false);
-    } catch (error) {
+    } catch (error: any) {
       setIsFetchingDraw(false);
-      console.log(error);
+      setHasError(true);
     }
   }, []);
 
@@ -34,8 +33,23 @@ const useDraw = ({ token }: UseDrawParams) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       console.log({ drawCreated });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const deleteDraw = useCallback(async (drawId: string) => {
+    try {
+      await AdminService.adminDrawRemove(drawId, {
+        state: false,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDrawList([]);
+      listDraw();
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +64,7 @@ const useDraw = ({ token }: UseDrawParams) => {
     hasData: !hasError && drawList.length,
     isFetchingDraw,
     createDraw,
+    deleteDraw,
   };
 };
 

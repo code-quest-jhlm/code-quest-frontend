@@ -19,8 +19,7 @@ const HomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, createDraw, drawList } = useDraw({ token });
-
+  const { hasData, createDraw, drawList, deleteDraw } = useDraw({ token });
   return (
     <DashboardLayout>
       <Flex justify="space-between" align="center" mb="sm">
@@ -53,7 +52,7 @@ const HomePage = () => {
         onClose={close}
         centered
       />
-      <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
+      <DrawCancel opened={openedCancel} onClose={closeClosure} deleteDraw={deleteDraw} centered />
     </DashboardLayout>
   );
 };

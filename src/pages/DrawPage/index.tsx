@@ -27,11 +27,15 @@ import DrawButtonImage from '@/assets/draw_button_image.png';
 import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
+import useDraw from '@/hooks/useDraw';
+import { useAppContext } from '@/provider/AppProvider';
 
 const DrawPage = () => {
+  const { token } = useAppContext();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
   const navigate = useNavigate();
+  const { deleteDraw } = useDraw({ token });
   return (
     <DashboardLayout>
       <Flex justify="flex-start" align="center" mb="sm" columnGap={8}>
@@ -94,7 +98,7 @@ const DrawPage = () => {
         </Grid.Col>
       </Grid>
       <DrawWinner opened={opened} onClose={close} centered />
-      <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
+      <DrawCancel opened={openedCancel} onClose={closeClosure} deleteDraw={deleteDraw} centered />
     </DashboardLayout>
   );
 };
