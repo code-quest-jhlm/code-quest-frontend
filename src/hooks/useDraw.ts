@@ -7,6 +7,7 @@ const useDraw = () => {
   const [isFetchingDraw, setIsFetchingDraw] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [drawList, setDrawList] = useState<any[]>([]);
+  const [draw, setDraw] = useState<any>({});
 
   const listDraw = useCallback(async () => {
     try {
@@ -39,6 +40,22 @@ const useDraw = () => {
     }
   }, []);
 
+  const getDraw = useCallback(
+    async (drawID: string) => {
+      try {
+        const response = await AdminService.adminDrawFindOne(drawID, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
+          },
+        });
+        setDraw(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [],
+  );
+
   useEffect(() => {
     listDraw();
   }, []);
@@ -48,6 +65,8 @@ const useDraw = () => {
     hasData: !hasError && drawList.length,
     isFetchingDraw,
     deleteDraw,
+    draw,
+    getDraw,
   };
 };
 

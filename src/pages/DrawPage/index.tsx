@@ -17,6 +17,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconPencil, IconChevronLeft } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
+import { useEffect } from 'react';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import Attendees from '@/components/Attendees';
@@ -36,9 +37,13 @@ const DrawPage = () => {
 
   const navigate = useNavigate();
 
-  const { deleteDraw } = useDraw();
+  const { deleteDraw, draw, getDraw } = useDraw();
 
   const { updateDraw } = useDrawAdministration();
+
+  useEffect(() => {
+    getDraw(sessionStorage.getItem('DRAWID')!);
+  }, []);
 
   return (
     <DashboardLayout>
@@ -53,7 +58,7 @@ const DrawPage = () => {
           />
         </ActionIcon>
 
-        <Title order={2}>Nombre del sorteo</Title>
+        <Title order={2}>{draw?.title}</Title>
 
         <ActionIcon variant="subtle">
           <IconPencil size={20} stroke={1.5} />
@@ -86,7 +91,9 @@ const DrawPage = () => {
             </Grid>
           </Box>
           <Space style={{ marginBottom: rem(24) }} />
-          <Attendees users={[]} />
+          <Attendees
+            users={draw?.participants?.map((p: any) => ({ name: p.name, image: p.avatar }))}
+          />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Flex justify="space-between" direction="column" align="center">

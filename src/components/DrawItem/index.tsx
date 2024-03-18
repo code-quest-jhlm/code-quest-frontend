@@ -48,6 +48,7 @@ const DrawItem: FC<DrawItemProps> = ({
                     size={32}
                     stroke={1.5}
                     onClick={() => {
+                      sessionStorage.setItem('DRAWID', item.id);
                       navigate('/draw');
                     }}
                   />

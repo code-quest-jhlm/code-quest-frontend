@@ -26,7 +26,7 @@ const Attendees: FC<AttendeesProps> = ({
         order={1}
         size={rem(18)}
       >
-        Participantes activos: {users.length}
+        Participantes activos: {users?.length || 0}
       </Title>
       <ActionIcon variant="subtle" className="cq-action-button">
         <IconRefresh
