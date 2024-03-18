@@ -1,5 +1,5 @@
 import { Box, BoxComponentProps, Image, ImageProps } from '@mantine/core';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface AssetRenderProps {
   boxConfig: BoxComponentProps;

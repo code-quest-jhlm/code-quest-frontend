@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { useState } from 'react';
 
 function useRandomWinners<T>() {
