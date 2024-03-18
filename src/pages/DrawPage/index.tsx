@@ -39,8 +39,11 @@ const DrawPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { updateDraw, deleteDraw } = useDrawAdministration();
-
+  const { updateDraw, deleteDraw, getParticipants, currentDraw } = useDrawAdministration();
+  const participants = (currentDraw ?? state)?.participants?.map(
+    (p: any) => ({ name: p.name, image: p.avatar })
+  );
+  console.log({ participants });
   useEffect(() => {
     const listener = (() => {
       navigate('/home');
@@ -103,8 +106,10 @@ const DrawPage = () => {
           </Box>
           <Space style={{ marginBottom: rem(24) }} />
           <Attendees
-            users={state?.participants?.map((p: any) => ({ name: p.name, image: p.avatar }))}
-            refresh={() => {}}
+            users={participants}
+            refresh={async () => {
+              await getParticipants(state?.id);
+            }}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>

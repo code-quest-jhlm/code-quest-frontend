@@ -15,7 +15,7 @@ import RenderGrid from './partials/RenderGrid';
 
 interface AttendeesProps {
   users: any[]
-  refresh: Function
+  refresh: () => void
 }
 
 const Attendees: FC<AttendeesProps> = ({
@@ -34,9 +34,7 @@ const Attendees: FC<AttendeesProps> = ({
         <IconRefresh
           cursor="pointer"
           color="#A8A5FB"
-          onClick={async () => {
-            await refresh();
-          }}
+          onClick={refresh}
         />
       </ActionIcon>
     </Flex>

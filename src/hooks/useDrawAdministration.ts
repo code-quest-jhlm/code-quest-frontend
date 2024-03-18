@@ -60,11 +60,12 @@ const useDrawAdministration = () => {
 
   const getParticipants = useCallback(async (drawId: string) => {
     try {
-      await AdminService.adminParticipantsDrawFindOne(drawId, {
+      const draw = await AdminService.adminParticipantsDrawFindOne<DrawItemValue>(drawId, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
         },
       });
+      setCurrentDraw(draw);
       // TODO: Mostrar notificacion
     } catch (error) {
       // TODO: Mostrar notificacion
