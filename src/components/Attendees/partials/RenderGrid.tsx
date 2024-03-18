@@ -16,7 +16,7 @@ interface RenderGridProps {
 const RenderGrid: FC<RenderGridProps> = ({
   users,
 }) => {
-  if (users?.length <= 0) {
+  if (!users) {
     return (
       <Image
         src={Empty}
