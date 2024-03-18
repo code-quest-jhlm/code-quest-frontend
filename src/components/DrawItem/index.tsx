@@ -3,18 +3,17 @@ import { Flex, Text, Avatar, Paper, Space, Box, ActionIcon, Group, Badge } from 
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
+import dayjs from 'dayjs';
 
 import './DrawItem.scss';
+import { DrawItemValue } from '@/interfaces/common.interface';
 
 interface DrawItemProps {
-  item: any;
-  openClosure: () => void
+  item: DrawItemValue;
+  openClosure: () => void;
 }
 
-const DrawItem: FC<DrawItemProps> = ({
-  openClosure,
-  item,
-}) => {
+const DrawItem: FC<DrawItemProps> = ({ openClosure, item }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -26,17 +25,16 @@ const DrawItem: FC<DrawItemProps> = ({
                 <Text fw={700}>{item.title} </Text>
                 <Badge size="xs" circle color={item.state ? 'green' : 'red'} />
               </Flex>
-              <Text size="sm">Fecha: {item.drawDate}</Text>
+              <Text size="sm">Fecha: {dayjs(item.drawDate).format('DD/MM/YYYY')}</Text>
               <Space h="xs" />
             </Flex>
             <Avatar.Group>
-              {item.participants?.slice(0, 3)?.map((participant: any) => (
-                <Avatar
-                  src={participant.avatar}
-                  size="sm"
-                />
-              ))}
-              {item.participants?.length > 3 && (<Avatar size="sm">+{item.participants?.length - 3}</Avatar>)}
+              {item.participants
+                ?.slice(0, 3)
+                ?.map((participant: any) => <Avatar src={participant.avatar} size="sm" />)}
+              {item.participants?.length > 3 && (
+                <Avatar size="sm">+{item.participants?.length - 3}</Avatar>
+              )}
             </Avatar.Group>
           </Box>
 
@@ -49,7 +47,9 @@ const DrawItem: FC<DrawItemProps> = ({
                     stroke={1.5}
                     onClick={() => {
                       sessionStorage.setItem('DRAWID', item.id);
-                      navigate('/draw');
+                      navigate('/draw', {
+                        state: item,
+                      });
                     }}
                   />
                 </ActionIcon>
