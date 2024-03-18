@@ -33,6 +33,8 @@ const DrawCancel: FC<DrawCancelProps> = (props) => {
             className="cq-button"
             onClick={async () => {
               await props.deleteDraw(drawId);
+              const event = new CustomEvent('CQ::GO::BACK');
+              window.dispatchEvent(event);
               props.onClose();
             }}
           >

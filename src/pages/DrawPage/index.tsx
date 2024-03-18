@@ -30,7 +30,6 @@ import DrawButtonImage from '@/assets/draw_button_image.png';
 import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
-import useDraw from '@/hooks/useDraw';
 import useDrawAdministration from '@/hooks/useDrawAdministration';
 
 const DrawPage = () => {
@@ -40,12 +39,16 @@ const DrawPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { deleteDraw, draw, getDraw } = useDraw();
-
-  const { updateDraw } = useDrawAdministration();
+  const { updateDraw, deleteDraw } = useDrawAdministration();
 
   useEffect(() => {
-    getDraw(sessionStorage.getItem('DRAWID')!);
+    const listener = (() => {
+      navigate('/home');
+    }) as EventListener;
+    window.addEventListener('CQ::GO::BACK', listener);
+    return () => {
+      window.removeEventListener('CQ::GO::BACK', listener);
+    };
   }, []);
 
   return (
@@ -81,7 +84,7 @@ const DrawPage = () => {
                   leftSection="#"
                   label="Número de ganadores"
                   placeholder="Ej: 1"
-                  value={state?.totalWinners.toString()}
+                  value={state?.totalWinners?.toString()}
                   data={['1', '2', '3', '4']}
                 />
               </Grid.Col>
@@ -100,7 +103,8 @@ const DrawPage = () => {
           </Box>
           <Space style={{ marginBottom: rem(24) }} />
           <Attendees
-            users={draw?.participants?.map((p: any) => ({ name: p.name, image: p.avatar }))}
+            users={state?.participants?.map((p: any) => ({ name: p.name, image: p.avatar }))}
+            refresh={() => {}}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>
@@ -115,7 +119,11 @@ const DrawPage = () => {
                 className="cq-cancel-draw-button"
                 variant="subtle"
                 color="red"
-                onClick={openClosure}
+                onClick={() => {
+                  const event = new CustomEvent('CQ::SEND::ID', { detail: { id: state?.id } });
+                  window.dispatchEvent(event);
+                  openClosure();
+                }}
               >
                 Cancelar sorteo
               </Button>

@@ -15,10 +15,12 @@ import RenderGrid from './partials/RenderGrid';
 
 interface AttendeesProps {
   users: any[]
+  refresh: Function
 }
 
 const Attendees: FC<AttendeesProps> = ({
   users,
+  refresh,
 }) => (
   <Paper>
     <Flex gap={rem(10)}>
@@ -32,7 +34,9 @@ const Attendees: FC<AttendeesProps> = ({
         <IconRefresh
           cursor="pointer"
           color="#A8A5FB"
-          onClick={() => {}}
+          onClick={async () => {
+            await refresh();
+          }}
         />
       </ActionIcon>
     </Flex>

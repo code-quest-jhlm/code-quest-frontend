@@ -47,10 +47,39 @@ const useDrawAdministration = () => {
     }
   }, []);
 
+  const deleteDraw = useCallback(async (drawId: string) => {
+    try {
+      await AdminService.adminDrawRemove(drawId, {
+        state: false,
+      }, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const getParticipants = useCallback(async (drawId: string) => {
+    try {
+      await AdminService.adminParticipantsDrawFindOne(drawId, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
+        },
+      });
+      // TODO: Mostrar notificacion
+    } catch (error) {
+      // TODO: Mostrar notificacion
+    }
+  }, []);
+
   return {
     createDraw,
     getDraw,
     updateDraw,
+    deleteDraw,
+    getParticipants,
   };
 };
 
