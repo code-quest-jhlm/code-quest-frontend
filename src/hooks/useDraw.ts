@@ -45,7 +45,7 @@ const useDraw = () => {
 
   return {
     drawList,
-    hasData: !!hasError && drawList.length,
+    hasData: !hasError && drawList.length,
     isFetchingDraw,
     deleteDraw,
   };

@@ -55,6 +55,10 @@ const AppHeader = () => {
                 leftSection={
                   <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
                 }
+                onClick={() => {
+                  sessionStorage.clear();
+                  navigate('/');
+                }}
               >
                 Cerrar sesión
               </Menu.Item>
