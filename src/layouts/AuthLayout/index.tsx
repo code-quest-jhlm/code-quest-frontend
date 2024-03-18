@@ -18,8 +18,8 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
-  const { setToken } = useAppContext();
-  const { hasSession } = useValidateSesion({ setToken });
+  const { setProfileInformation } = useAppContext();
+  const { hasSession } = useValidateSesion({ setProfileInformation });
 
   if (hasSession) {
     return <Navigate to="/home" replace />;
