@@ -1,0 +1,63 @@
+# Devtalles Fortune
+
+## Descripción
+
+Devtalles Fortune es una aplicación web desarrollada con React, diseñada específicamente para realizar sorteos entre los miembros del canal de Discord de Devtalles. La aplicación ofrece una interfaz sencilla y eficaz para gestionar sorteos, permitiendo a los usuarios crear, administrar y participar en sorteos con facilidad. Utilizando tecnologías modernas y dependencias actualizadas, Devtalles Fortune asegura una experiencia fluida y confiable para todos los usuarios.
+
+## Características
+
+- **Gestión de sorteos:** Creación y administración de sorteos directamente desde la interfaz de usuario.
+- **Integración con Discord:** Permite la participación de miembros de un canal de Discord específico en los sorteos.
+- **Interfaz moderna:** Utiliza `@mantine/core` para una experiencia de usuario atractiva y responsive.
+- **Seguridad:** Implementa `jwt-decode` para manejar la autenticación y seguridad de la sesión.
+
+## Tecnologías y Dependencias
+
+Este proyecto se ha desarrollado utilizando las siguientes tecnologías y dependencias:
+
+- React 18.2.0
+- Mantine (core, form, hooks) 7.6.x
+- Axios 1.6.8 para solicitudes HTTP
+- clsx 2.1.0 para manejar clases condicionales
+- dayjs 1.11.10 para manipulación de fechas
+- jwt-decode 4.0.0 para decodificar tokens JWT
+- React Router DOM 6.22.3 para navegación
+- Unplugin Fonts 1.1.1 para fuentes personalizadas
+- Varios íconos de Tabler Icons React 3.1.0
+- Y más dependencias orientadas al desarrollo y pruebas.
+
+## Cómo Empezar
+
+Para levantar el proyecto en local, sigue estos pasos:
+
+1. **Clona el repositorio:**
+
+```
+git clone https://tu-repositorio/devtalles-fortune.git
+cd devtalles-fortune
+```
+
+2. **Instala las dependencias:**
+
+```
+npm install
+```
+
+3. **Ejecuta el proyecto:**
+
+```
+npm run dev
+```
+
+Este comando inicia el servidor de desarrollo. Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación en el navegador.
+
+## Comandos Disponibles
+
+Este proyecto incluye varios comandos para facilitar el desarrollo y la construcción del proyecto:
+
+- `npm run dev`: Inicia el servidor de desarrollo con Vite.
+- `npm run build`: Compila la aplicación para producción.
+- `npm run serve`: Sirve la versión compilada de la aplicación.
+- `npm run test`: Ejecuta una serie de pruebas incluyendo verificación de tipos, formateo, linting y tests unitarios.
+- Y varios comandos más para linting, formateo, y preparación de Husky.
+
