@@ -26,19 +26,6 @@ const useDraw = () => {
     }
   }, []);
 
-  const createDraw = useCallback(async (values: CreateDrawPayload) => {
-    try {
-      await AdminService.adminDrawCreate(values, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // TODO: Mostrar notificacion
-    } catch (error) {
-      // TODO: Mostrar notificacion
-    }
-  }, []);
-
   useEffect(() => {
     listDraw();
   }, []);
@@ -47,7 +34,6 @@ const useDraw = () => {
     drawList,
     hasData: !!hasError && drawList.length,
     isFetchingDraw,
-    createDraw,
   };
 };
 

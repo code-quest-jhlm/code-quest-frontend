@@ -7,6 +7,8 @@ const AdminService = {
 
   adminDrawCreate: <TResponse, TRequest>(data: TRequest, config?: AxiosRequestConfig,) => makeRequest<TResponse>('POST', '/draw', data, config),
   adminDrawFindAll: <TResponse>(config?: AxiosRequestConfig) => makeRequest<TResponse>('GET', '/draw', undefined, config),
+  adminDrawFindOne: <TResponse>(id: string, config?: AxiosRequestConfig) => makeRequest<TResponse>('GET', `/draw/${id}`, undefined, config),
+  adminDrawUpdateOne: <TResponse>(id: string, config?: AxiosRequestConfig) => makeRequest<TResponse>('PATCH', `/draw/${id}`, undefined, config),
 };
 
 export default AdminService;

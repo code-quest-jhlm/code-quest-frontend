@@ -27,11 +27,15 @@ import DrawButtonImage from '@/assets/draw_button_image.png';
 import './DrawPage.scss';
 import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
+import useDrawAdministration from '@/hooks/useDrawAdministration';
 
 const DrawPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
+
   const navigate = useNavigate();
+  const { updateDraw } = useDrawAdministration();
+
   return (
     <DashboardLayout>
       <Flex justify="flex-start" align="center" mb="sm" columnGap={8}>
