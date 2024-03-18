@@ -16,7 +16,7 @@ interface RenderGridProps {
 const RenderGrid: FC<RenderGridProps> = ({
   users,
 }) => {
-  if (users.length <= 0) {
+  if (users?.length <= 0) {
     return (
       <Image
         src={Empty}
@@ -26,7 +26,7 @@ const RenderGrid: FC<RenderGridProps> = ({
       />
     );
   }
-  return users.map((user) => (
+  return users?.map((user) => (
     <Attendee image={user.image} userName={user.name} />
   ));
 };

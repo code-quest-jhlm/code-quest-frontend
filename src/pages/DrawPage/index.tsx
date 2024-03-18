@@ -19,6 +19,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconPencil, IconChevronLeft } from '@tabler/icons-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useEffect } from 'react';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import Attendees from '@/components/Attendees';
@@ -39,9 +40,13 @@ const DrawPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const { deleteDraw } = useDraw();
+  const { deleteDraw, draw, getDraw } = useDraw();
 
   const { updateDraw } = useDrawAdministration();
+
+  useEffect(() => {
+    getDraw(sessionStorage.getItem('DRAWID')!);
+  }, []);
 
   return (
     <DashboardLayout>
@@ -94,7 +99,9 @@ const DrawPage = () => {
             </SimpleGrid>
           </Box>
           <Space style={{ marginBottom: rem(24) }} />
-          <Attendees users={[]} />
+          <Attendees
+            users={draw?.participants?.map((p: any) => ({ name: p.name, image: p.avatar }))}
+          />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Flex justify="space-between" direction="column" align="center">

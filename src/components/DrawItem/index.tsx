@@ -46,6 +46,7 @@ const DrawItem: FC<DrawItemProps> = ({ openClosure, item }) => {
                     size={32}
                     stroke={1.5}
                     onClick={() => {
+                      sessionStorage.setItem('DRAWID', item.id);
                       navigate('/draw', {
                         state: item,
                       });
