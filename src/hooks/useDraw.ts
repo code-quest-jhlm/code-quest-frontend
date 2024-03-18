@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useEffect, useState } from 'react';
 import AdminService from '@/services/AdminService';
 import { CreateDrawPayload } from '@/interfaces/common.interface';
+import { useAppContext } from '@/provider/AppProvider';
 
-interface UseDrawParams {
-  token: string
-}
-
-const useDraw = ({ token }: UseDrawParams) => {
+const useDraw = () => {
+  const { token } = useAppContext();
   const [isFetchingDraw, setIsFetchingDraw] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [drawList, setDrawList] = useState<any[]>([]);
@@ -28,14 +27,15 @@ const useDraw = ({ token }: UseDrawParams) => {
 
   const createDraw = useCallback(async (values: CreateDrawPayload) => {
     try {
-      const drawCreated = await AdminService.adminDrawCreate(values, {
+      await AdminService.adminDrawCreate(values, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log({ drawCreated });
+      // TODO: Mostrar notificacion
+
     } catch (error) {
-      console.log(error);
+      // TODO: Mostrar notificacion
     }
   }, []);
 
@@ -61,7 +61,7 @@ const useDraw = ({ token }: UseDrawParams) => {
 
   return {
     drawList,
-    hasData: !hasError && drawList.length,
+    hasData: !!hasError && drawList.length,
     isFetchingDraw,
     createDraw,
     deleteDraw,

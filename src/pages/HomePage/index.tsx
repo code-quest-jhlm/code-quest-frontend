@@ -11,15 +11,14 @@ import DrawCancel from '@/components/DrawCancel';
 import useDraw from '@/hooks/useDraw';
 
 import NotDraw from '@/assets/not_draw.png';
-import { useAppContext } from '@/provider/AppProvider';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { token } = useAppContext();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, createDraw, drawList, deleteDraw } = useDraw({ token });
+  const { hasData, createDraw, drawList, deleteDraw } = useDraw();
+
   return (
     <DashboardLayout>
       <Flex justify="space-between" align="center" mb="sm">
