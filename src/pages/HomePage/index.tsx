@@ -18,7 +18,7 @@ const HomePage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, drawList } = useDraw();
+  const { hasData, drawList, deleteDraw } = useDraw();
   const { createDraw } = useDrawAdministration();
 
   return (
@@ -54,7 +54,7 @@ const HomePage = () => {
         onClose={close}
         centered
       />
-      <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
+      <DrawCancel opened={openedCancel} onClose={closeClosure} deleteDraw={deleteDraw} centered />
     </DashboardLayout>
   );
 };

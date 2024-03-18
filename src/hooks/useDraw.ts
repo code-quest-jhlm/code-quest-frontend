@@ -7,8 +7,8 @@ import { useAppContext } from '@/provider/AppProvider';
 const useDraw = () => {
   const { token } = useAppContext();
   const [isFetchingDraw, setIsFetchingDraw] = useState(true);
-  const [hasError, setHasError] = useState(true);
-  const [drawList, setDrawList] = useState([]);
+  const [hasError, setHasError] = useState(false);
+  const [drawList, setDrawList] = useState<any[]>([]);
 
   const listDraw = useCallback(async () => {
     try {
@@ -17,11 +17,27 @@ const useDraw = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      setDrawList(list as any);
+      setIsFetchingDraw(false);
+    } catch (error: any) {
+      setIsFetchingDraw(false);
+      setHasError(true);
+    }
+  }, []);
 
-      console.log({ list });
-      setIsFetchingDraw(false);
+
+  const deleteDraw = useCallback(async (drawId: string) => {
+    try {
+      await AdminService.adminDrawRemove(drawId, {
+        state: false,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDrawList([]);
+      listDraw();
     } catch (error) {
-      setIsFetchingDraw(false);
       console.log(error);
     }
   }, []);
@@ -34,6 +50,7 @@ const useDraw = () => {
     drawList,
     hasData: !!hasError && drawList.length,
     isFetchingDraw,
+    deleteDraw,
   };
 };
 

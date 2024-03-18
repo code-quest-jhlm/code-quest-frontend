@@ -7,7 +7,7 @@ import Router from '@/router';
 export default function App() {
   return (
     <MantineProvider theme={cqTheme} defaultColorScheme="dark">
-        <Router />
+      <Router />
     </MantineProvider>
   );
 }
