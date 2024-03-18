@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
-import { CreateDrawPayload } from '@/interfaces/common.interface';
+import { useCallback, useState } from 'react';
+import { CreateDrawPayload, DrawItemValue } from '@/interfaces/common.interface';
 import AdminService from '@/services/AdminService';
 import { TOKEN_KEY } from '@/constants';
 
 const useDrawAdministration = () => {
+  const [currentDraw, setCurrentDraw] = useState<DrawItemValue | null>();
   const createDraw = useCallback(async (values: CreateDrawPayload) => {
     try {
       await AdminService.adminDrawCreate({
@@ -36,18 +37,15 @@ const useDrawAdministration = () => {
 
   const getDraw = useCallback(async (drawId: string) => {
     try {
-      await AdminService.adminDrawFindOne(drawId, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}`,
-        },
-      });
-      // TODO: Mostrar notificacion
+      const data = await AdminService.adminDrawFindOne<DrawItemValue>(drawId);
+      setCurrentDraw(data);
     } catch (error) {
-      // TODO: Mostrar notificacion
+      setCurrentDraw(null);
     }
   }, []);
 
   return {
+    currentDraw,
     createDraw,
     getDraw,
     updateDraw,
