@@ -15,12 +15,10 @@ interface LoginResponse {
 }
 
 interface UseAuthenticationParams {
-  setToken: Function;
   navigate: NavigateFunction;
-  setProfileInformation: Function
 }
 
-function useAuthentication({ setToken, navigate, setProfileInformation }: UseAuthenticationParams) {
+function useAuthentication({ navigate }: UseAuthenticationParams) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorFields, setErrorFields] = useState([]);
 
@@ -29,17 +27,8 @@ function useAuthentication({ setToken, navigate, setProfileInformation }: UseAut
 
     try {
       const response = await AdminService.adminLogin<LoginResponse, LoginData>(loginData);
-
       sessionStorage.setItem(TOKEN_KEY, response.token);
-      setToken(response.token);
 
-      const profile = await AdminService.adminProfile({
-        headers: {
-          Authorization: `Bearer ${response.token}`,
-        },
-      });
-
-      setProfileInformation(profile);
       setIsLoading(false);
 
       navigate('/home');
@@ -51,7 +40,6 @@ function useAuthentication({ setToken, navigate, setProfileInformation }: UseAut
       }
     } finally {
       setIsLoading(false);
-      setToken('');
     }
   }, []);
 

@@ -6,7 +6,6 @@ import logo from '@/assets/detalles_light_logo.png';
 
 import classes from './AppHeader.module.css';
 import { useAppContext } from '@/provider/AppProvider';
-import { generateRandomSeed } from '@/helpers';
 
 const AppHeader = () => {
   const navigate = useNavigate();
@@ -36,14 +35,14 @@ const AppHeader = () => {
                 <Group gap={7}>
                   <div>
                     <Text fw={500} size="sm" lh={1} mr={3}>
-                      {profileInformation.name}
+                      {profileInformation?.fullName}
                     </Text>
-                    <small>#{profileInformation?.userId}</small>
+                    <small>#{profileInformation?.username?.toUpperCase()}</small>
                   </div>
                   <Avatar
                     src={
-                      profileInformation?.avatar}
-                    alt={profileInformation.name}
+                      profileInformation?.username}
+                    alt={profileInformation?.username}
                     radius="xl"
                     size={54}
                   />

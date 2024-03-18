@@ -4,20 +4,24 @@ import { TOKEN_KEY } from '@/constants';
 
 interface UseValidateSesionProps {
   setToken: Function
+  setProfileInformation: Function;
 }
 
 const useValidateSesion = ({
   setToken,
+  setProfileInformation,
 }: UseValidateSesionProps) => {
   const token = sessionStorage.getItem(TOKEN_KEY) || '';
 
   useEffect(() => {
     if (token.length) {
       try {
-        jwtDecode(token);
+        const data = jwtDecode(token);
+        setProfileInformation(data);
         setToken(token);
       } catch (error) {
         setToken('');
+        setProfileInformation(null);
       }
     }
   }, [token]);

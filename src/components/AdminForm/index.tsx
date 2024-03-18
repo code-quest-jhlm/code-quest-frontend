@@ -2,19 +2,15 @@ import { Button, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppContext } from '@/provider/AppProvider';
 import useAuthentication from '@/hooks/useAuthentication';
 
 import { extractFirstErrorForEachField } from '@/helpers';
 
 const AdminForm = () => {
   const navigate = useNavigate();
-  const { setToken, setProfileInformation } = useAppContext();
 
   const { login, errorFields, setErrorFields } = useAuthentication({
     navigate,
-    setToken,
-    setProfileInformation,
   });
 
   const form = useForm({

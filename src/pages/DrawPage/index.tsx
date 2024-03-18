@@ -29,7 +29,6 @@ import DrawWinner from '@/components/DrawWinner';
 import DrawCancel from '@/components/DrawCancel';
 
 const DrawPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
   const navigate = useNavigate();
@@ -58,21 +57,13 @@ const DrawPage = () => {
         <Grid.Col span={{ base: 12, md: 8 }}>
           <Box>
             <Grid>
-              <Grid.Col span={{ base: 6, md: 5 }}>
+              <Grid.Col span={{ base: 12, md: 12 }}>
                 <Select
                   leftSectionPointerEvents="none"
                   leftSection="#"
                   label="Número de ganadores"
                   placeholder="Ej: 1"
                   data={['1', '2', '3', '4']}
-                />
-              </Grid.Col>
-              <Grid.Col span={{ base: 6, md: 5 }}>
-                <TextInput
-                  label="Máx. participantes"
-                  placeholder="Ej: 1200"
-                  leftSectionPointerEvents="none"
-                  leftSection="#"
                 />
               </Grid.Col>
             </Grid>

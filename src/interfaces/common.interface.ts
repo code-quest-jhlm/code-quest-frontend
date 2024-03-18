@@ -1,11 +1,16 @@
 export interface ProfileInfo {
-  id: number;
-  name: string;
-  userId: string;
+  id: string;
+  username: string;
   email: string;
-  role: string;
-  deletedAt: null;
-  avatar: string
+  password: string;
+  fullName: string;
+  iat: number;
+  exp: number;
 }
 
-export type ProfileInformation = ProfileInfo;
+export type ProfileInformation = ProfileInfo | null;
+
+export interface CreateDrawPayload {
+  title: string
+  description: string
+}

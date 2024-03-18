@@ -1,6 +1,7 @@
 import { Button, Flex, Image, ScrollArea, Text, Title, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
+import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import DrawItem from '@/components/DrawItem';
@@ -13,11 +14,12 @@ import NotDraw from '@/assets/not_draw.png';
 import { useAppContext } from '@/provider/AppProvider';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const { token } = useAppContext();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedCancel, { open: openClosure, close: closeClosure }] = useDisclosure(false);
 
-  const { hasData, drawList } = useDraw({ token });
+  const { hasData, createDraw, drawList } = useDraw({ token });
 
   return (
     <DashboardLayout>
@@ -38,11 +40,19 @@ const HomePage = () => {
               w={{ base: rem(300), md: rem(400) }}
               h={{ base: rem(300), md: rem(400) }}
             />
-            <Text fw="bold" mr={{ base: rem(32), md: rem(48) }}>No hay sorteos activos</Text>
+            <Text fw="bold" mr={{ base: rem(32), md: rem(48) }}>
+              No hay sorteos activos
+            </Text>
           </Flex>
         )}
       </ScrollArea.Autosize>
-      <DrawCreator opened={opened} onClose={close} centered />
+      <DrawCreator
+        navigate={navigate}
+        onSubmitForm={createDraw}
+        opened={opened}
+        onClose={close}
+        centered
+      />
       <DrawCancel opened={openedCancel} onClose={closeClosure} centered />
     </DashboardLayout>
   );
